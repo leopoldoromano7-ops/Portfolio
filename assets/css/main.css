@@ -4233,6 +4233,11 @@ a:hover {
   box-shadow: 0 0 18px rgba(255, 244, 92, 0.16);
 }
 
+.about-mark {
+  font-family: var(--heading-font);
+  font-weight: 700;
+}
+
 .meta-pills span,
 .skill-chip,
 .project-tags span,
