@@ -26,6 +26,14 @@
   const journeyModal = document.querySelector('#journey-modal');
   const journeyModalBody = journeyModal?.querySelector('.journey-modal-body') ?? null;
 
+  // Keep modals outside the main stacking context so they always cover the fixed sidebar.
+  if (skillsModal) {
+    document.body.appendChild(skillsModal);
+  }
+  if (journeyModal) {
+    document.body.appendChild(journeyModal);
+  }
+
   function closeSkillModal() {
     if (!skillsModal || !skillsModalBody) return;
     skillsModal.classList.remove('is-open');
