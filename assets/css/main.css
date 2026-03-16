@@ -3756,16 +3756,26 @@ h6 {
 
 @media (min-width: 992px) {
   .header {
-    left: 0;
+    left: calc(-296px - 36px);
     width: 296px;
   }
 
+  .header.header-show {
+    left: 0;
+  }
+
   .header .header-toggle {
-    display: none;
+    display: flex;
   }
 
   .header~main,
   .header~#footer {
+    transition: margin-left 0.3s ease;
+    margin-left: 0;
+  }
+
+  .header.header-show~main,
+  .header.header-show~#footer {
     margin-left: 296px;
   }
 }
@@ -4044,6 +4054,7 @@ a:hover {
 
 .header .header-toggle,
 .scroll-top {
+  border: 0;
   border-radius: 0;
   background: linear-gradient(135deg, var(--accent-color), var(--accent-soft-color));
   color: var(--contrast-color);
@@ -4054,6 +4065,20 @@ a:hover {
 .header .header-toggle:hover,
 .scroll-top:hover {
   background: linear-gradient(135deg, var(--accent-soft-color), var(--accent-color));
+}
+
+.header .header-toggle {
+  top: 20px;
+  left: 20px;
+  right: auto;
+  width: 48px;
+  height: 48px;
+  transition: background 0.3s ease, box-shadow 0.3s ease, left 0.3s ease, transform 0.3s ease;
+}
+
+.header .header-toggle:focus-visible {
+  outline: 1px solid rgba(255, 244, 92, 0.64);
+  outline-offset: 4px;
 }
 
 #preloader::before {
@@ -4085,6 +4110,21 @@ a:hover {
   text-shadow:
     0 0 18px rgba(255, 244, 92, 0.16),
     0 0 34px rgba(216, 255, 75, 0.1);
+}
+
+.hero .hero-name {
+  max-width: 100%;
+  margin-bottom: 10px;
+}
+
+.hero .hero-role {
+  margin: 0 0 18px;
+  color: rgba(232, 239, 179, 0.9);
+  font-size: clamp(0.96rem, 1.6vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+  text-transform: uppercase;
 }
 
 .hero p span,
@@ -4150,6 +4190,7 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  padding-top: 10px;
   margin-bottom: 20px;
 }
 
@@ -4435,6 +4476,23 @@ a:hover {
 
 .footer .credits a:hover {
   color: var(--accent-soft-color);
+}
+
+@media (min-width: 992px) {
+  body.sidebar-open .header .header-toggle {
+    left: 316px;
+  }
+}
+
+@media (max-width: 991px) {
+  body.sidebar-open {
+    overflow: hidden;
+  }
+
+  .header .header-toggle {
+    left: auto;
+    right: 15px;
+  }
 }
 
 @media (max-width: 768px) {
