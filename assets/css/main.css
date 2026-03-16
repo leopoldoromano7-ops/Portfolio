@@ -4117,6 +4117,23 @@ a:hover {
   box-shadow: none;
 }
 
+.hero .eyebrow {
+  width: fit-content;
+  min-width: 0;
+  max-width: 100%;
+  margin-bottom: 22px;
+  padding: 18px 24px 17px;
+  justify-content: flex-start;
+  border-color: rgba(255, 214, 51, 0.28);
+  background: linear-gradient(90deg, rgba(255, 214, 51, 0.16), rgba(216, 255, 75, 0.08) 72%, rgba(255, 214, 51, 0.04));
+  color: #fff6cd;
+  font-size: 0.96rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  line-height: 1;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+}
+
 .hero-points li::before {
   background: linear-gradient(135deg, var(--accent-color), var(--accent-soft-color));
   box-shadow: 0 0 0 5px rgba(255, 244, 92, 0.1);
@@ -4465,17 +4482,22 @@ a:hover {
 }
 
 .expandable-section-toggle {
+  position: relative;
   width: 100%;
   padding: 22px 24px;
   border: 1px solid var(--frame-color);
-  background:
-    linear-gradient(90deg, rgba(255, 214, 51, 0.18), rgba(216, 255, 75, 0.08) 24%, rgba(10, 7, 8, 0.96) 24%);
+  background-image:
+    linear-gradient(90deg, rgba(255, 214, 51, 0.18), rgba(216, 255, 75, 0.08)),
+    linear-gradient(180deg, rgba(10, 7, 8, 0.96), rgba(10, 7, 8, 0.98));
+  background-position: left top, left top;
+  background-size: 24% 100%, 100% 100%;
+  background-repeat: no-repeat;
   color: var(--default-color);
   display: grid;
   gap: 14px;
   text-align: left;
   clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));
-  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  transition: border-color 0.3s ease, background-size 0.55s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .expandable-section-toggle::before,
@@ -4576,10 +4598,10 @@ a:hover {
 }
 
 .expandable-section-toggle:hover,
+.expandable-section-toggle:focus-visible,
 .expandable-section.is-expanded .expandable-section-toggle {
   border-color: var(--frame-strong-color);
-  background:
-    linear-gradient(90deg, rgba(255, 214, 51, 0.24), rgba(216, 255, 75, 0.12) 24%, rgba(10, 7, 8, 0.98) 24%);
+  background-size: 100% 100%, 100% 100%;
   box-shadow:
     inset 0 0 0 1px rgba(255, 244, 92, 0.05),
     0 0 24px rgba(255, 244, 92, 0.08);
@@ -4587,6 +4609,7 @@ a:hover {
 }
 
 .expandable-section-toggle:hover .expandable-section-state i,
+.expandable-section-toggle:focus-visible .expandable-section-state i,
 .expandable-section.is-expanded .expandable-section-state i {
   background: linear-gradient(135deg, var(--accent-color), var(--accent-soft-color));
   color: var(--contrast-color);
