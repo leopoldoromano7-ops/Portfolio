@@ -39,7 +39,11 @@
 <body class="portfolio-details-page">
 
   <header id="header" class="header dark-background d-flex flex-column">
-    <i class="header-toggle d-xl-none bi bi-list"></i>
+    <button type="button" class="header-toggle" aria-label="Apri navigazione" aria-expanded="false"
+      aria-controls="navmenu">
+      <span class="header-toggle-label" data-header-toggle-label>Menu</span>
+      <i class="bi bi-grid-3x3-gap-fill header-toggle-icon" data-header-toggle-icon aria-hidden="true"></i>
+    </button>
 
     <div class="profile-img">
       <img src="assets/img/my-profile-img.jpg" alt="" class="img-fluid rounded-circle">

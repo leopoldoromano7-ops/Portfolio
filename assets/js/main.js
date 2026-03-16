@@ -14,6 +14,8 @@
    */
   const header = document.querySelector('#header');
   const headerToggleBtn = document.querySelector('.header-toggle');
+  const headerToggleLabel = headerToggleBtn?.querySelector('[data-header-toggle-label]') ?? null;
+  const headerToggleIcon = headerToggleBtn?.querySelector('[data-header-toggle-icon]') ?? null;
 
   function isDesktopViewport() {
     return window.innerWidth >= 992;
@@ -24,10 +26,18 @@
 
     header.classList.toggle('header-show', isOpen);
     document.body.classList.toggle('sidebar-open', isOpen);
-    headerToggleBtn.classList.toggle('bi-list', !isOpen);
-    headerToggleBtn.classList.toggle('bi-x', isOpen);
+    headerToggleBtn.classList.toggle('is-open', isOpen);
     headerToggleBtn.setAttribute('aria-expanded', String(isOpen));
     headerToggleBtn.setAttribute('aria-label', isOpen ? 'Chiudi navigazione' : 'Apri navigazione');
+
+    if (headerToggleLabel) {
+      headerToggleLabel.textContent = isOpen ? 'Chiudi' : 'Menu';
+    }
+
+    if (headerToggleIcon) {
+      headerToggleIcon.classList.toggle('bi-grid-3x3-gap-fill', !isOpen);
+      headerToggleIcon.classList.toggle('bi-x-lg', isOpen);
+    }
   }
 
   function headerToggle(forceState) {
