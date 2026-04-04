@@ -1,11 +1,3 @@
-/**
-* Template Name: iPortfolio
-* Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
-* Updated: Jun 29 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
 (function() {
   "use strict";
 
@@ -57,6 +49,7 @@
   const skillsModalBody = skillsModal?.querySelector('.skills-modal-body') ?? null;
   const journeyModal = document.querySelector('#journey-modal');
   const journeyModalBody = journeyModal?.querySelector('.journey-modal-body') ?? null;
+  const journeyModalDialog = journeyModal?.querySelector('.skills-modal-dialog') ?? null;
 
   // Keep modals outside the main stacking context so they always cover the fixed sidebar.
   if (skillsModal) {
@@ -94,6 +87,8 @@
 
   function closeJourneyModal() {
     if (!journeyModal || !journeyModalBody) return;
+    clearTimeout(journeyModal._modalScrollStateTimer);
+    journeyModal.classList.remove('modal-needs-scroll');
     journeyModal.classList.remove('is-open');
     journeyModal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('skills-modal-open');
@@ -116,22 +111,54 @@
     journeyModal.classList.add('is-open');
     journeyModal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('skills-modal-open');
+    syncModalScrollStateLater(journeyModal, journeyModalBody, journeyModalDialog);
+  }
+
+  function syncModalScrollState(modal, body, dialog) {
+    if (!modal || !body || !dialog) return;
+    const needsScroll = body.scrollHeight - body.clientHeight > 6;
+    modal.classList.toggle('modal-needs-scroll', needsScroll);
+  }
+
+  function syncModalScrollStateLater(modal, body, dialog) {
+    if (!modal) return;
+
+    clearTimeout(modal._modalScrollStateTimer);
+    modal._modalScrollStateTimer = window.setTimeout(() => {
+      syncModalScrollState(modal, body, dialog);
+    }, 40);
+  }
+
+  function handleExpandableHashNavigation(event, hash, options = {}) {
+    if (!hash) return false;
+
+    const targetSection = document.querySelector(hash);
+    if (!targetSection || !targetSection.classList.contains('expandable-section')) {
+      return false;
+    }
+
+    event.preventDefault();
+    openExpandableSection(targetSection, {
+      scrollIntoView: true,
+      ...options
+    });
+
+    if (window.location.hash !== hash) {
+      window.history.replaceState(null, '', hash);
+    }
+
+    return true;
   }
 
   /**
    * Hide mobile nav on same-page/hash links
    */
   document.querySelectorAll('#navmenu a').forEach(navmenu => {
-    navmenu.addEventListener('click', () => {
+    navmenu.addEventListener('click', (event) => {
       closeSkillModal();
       closeJourneyModal();
 
-      if (navmenu.hash) {
-        const targetSection = document.querySelector(navmenu.hash);
-        if (targetSection && targetSection.classList.contains('expandable-section')) {
-          openExpandableSection(targetSection);
-        }
-      }
+      handleExpandableHashNavigation(event, navmenu.hash);
 
       if (!isDesktopViewport() && header?.classList.contains('header-show')) {
         headerToggle(false);
@@ -143,21 +170,20 @@
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     if (anchor.closest('#navmenu')) return;
 
-    anchor.addEventListener('click', () => {
-      if (!anchor.hash) return;
-
-      const targetSection = document.querySelector(anchor.hash);
-      if (targetSection && targetSection.classList.contains('expandable-section')) {
-        openExpandableSection(targetSection, {
-          scrollIntoView: true
-        });
-      }
+    anchor.addEventListener('click', (event) => {
+      handleExpandableHashNavigation(event, anchor.hash);
     });
   });
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && header?.classList.contains('header-show')) {
       headerToggle(false);
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (journeyModal?.classList.contains('is-open')) {
+      syncModalScrollStateLater(journeyModal, journeyModalBody, journeyModalDialog);
     }
   });
 
@@ -209,6 +235,8 @@
    * Expandable menu sections
    */
   const expandableSections = Array.from(document.querySelectorAll('.expandable-section'));
+  const EXPANDABLE_SCROLL_SYNC_DELAY = 160;
+  const EXPANDABLE_SCROLL_SETTLE_DELAY = 460;
 
   function refreshExpandableAnimations() {
     if (window.AOS) {
@@ -231,6 +259,59 @@
     section._skillsOrbitAnimationTimer = window.setTimeout(() => {
       section.classList.remove('is-orbit-animating');
     }, 1500);
+  }
+
+  function triggerJourneyHubAnimation(section) {
+    if (section.id !== 'resume') return;
+
+    clearTimeout(section._journeyHubAnimationTimer);
+    section.classList.remove('is-journey-animating');
+    void section.offsetWidth;
+    section.classList.add('is-journey-animating');
+
+    section._journeyHubAnimationTimer = window.setTimeout(() => {
+      section.classList.remove('is-journey-animating');
+    }, 1200);
+  }
+
+  function triggerPortfolioArchiveAnimation(section) {
+    if (section.id !== 'portfolio') return;
+
+    clearTimeout(section._portfolioArchiveAnimationTimer);
+    section.classList.remove('is-portfolio-animating');
+    void section.offsetWidth;
+    section.classList.add('is-portfolio-animating');
+
+    section._portfolioArchiveAnimationTimer = window.setTimeout(() => {
+      section.classList.remove('is-portfolio-animating');
+    }, 1400);
+  }
+
+  function getSectionScrollTop(section) {
+    const scrollMarginTop = Number.parseInt(getComputedStyle(section).scrollMarginTop, 10) || 0;
+    return section.getBoundingClientRect().top + window.scrollY - scrollMarginTop;
+  }
+
+  function scrollSectionIntoView(section, behavior = 'smooth') {
+    window.scrollTo({
+      top: getSectionScrollTop(section),
+      behavior
+    });
+  }
+
+  function scheduleExpandableSectionScroll(section, needsSettlePass = false) {
+    clearTimeout(section._expandableScrollTimer);
+    clearTimeout(section._expandableScrollSettleTimer);
+
+    section._expandableScrollTimer = window.setTimeout(() => {
+      scrollSectionIntoView(section, 'smooth');
+    }, EXPANDABLE_SCROLL_SYNC_DELAY);
+
+    if (needsSettlePass) {
+      section._expandableScrollSettleTimer = window.setTimeout(() => {
+        scrollSectionIntoView(section, 'smooth');
+      }, EXPANDABLE_SCROLL_SETTLE_DELAY);
+    }
   }
 
   function buildExpandableSection(section, index) {
@@ -342,6 +423,12 @@
       if (section.id === 'skills') {
         triggerSkillsOrbitAnimation(section);
       }
+      if (section.id === 'resume') {
+        triggerJourneyHubAnimation(section);
+      }
+      if (section.id === 'portfolio') {
+        triggerPortfolioArchiveAnimation(section);
+      }
     } else {
       panel.setAttribute('inert', '');
       if (section.id === 'skills') {
@@ -350,8 +437,16 @@
         closeSkillModal();
       }
       if (section.id === 'resume') {
+        clearTimeout(section._journeyHubAnimationTimer);
+        section.classList.remove('is-journey-animating');
         closeJourneyModal();
       }
+      if (section.id === 'portfolio') {
+        clearTimeout(section._portfolioArchiveAnimationTimer);
+        section.classList.remove('is-portfolio-animating');
+      }
+      clearTimeout(section._expandableScrollTimer);
+      clearTimeout(section._expandableScrollSettleTimer);
     }
   }
 
@@ -359,6 +454,10 @@
     const {
       scrollIntoView = false
     } = options;
+    const targetIndex = expandableSections.indexOf(section);
+    const hadExpandedSectionAbove = expandableSections.some((item, index) =>
+      index < targetIndex && item.classList.contains('is-expanded')
+    );
 
     expandableSections.forEach((item) => {
       setExpandableState(item, item === section);
@@ -367,12 +466,7 @@
     refreshExpandableAnimations();
 
     if (scrollIntoView) {
-      setTimeout(() => {
-        section.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }, 140);
+      scheduleExpandableSectionScroll(section, hadExpandedSectionAbove);
     }
   }
 
@@ -445,11 +539,7 @@
           if (section.classList.contains('expandable-section')) {
             openExpandableSection(section);
           }
-          let scrollMarginTop = getComputedStyle(section).scrollMarginTop;
-          window.scrollTo({
-            top: section.offsetTop - parseInt(scrollMarginTop),
-            behavior: 'smooth'
-          });
+          scrollSectionIntoView(section, 'smooth');
         }, 100);
       }
     }
