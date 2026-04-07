@@ -1835,6 +1835,8 @@ section,
 
 .project-card {
   position: relative;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   padding: 30px;
   border-radius: 28px;
@@ -1900,6 +1902,57 @@ section,
 .action-link {
   font-weight: 700;
   color: var(--accent-color);
+}
+
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.project-actions .action-link {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 12px 16px;
+  border: 1px solid var(--frame-color);
+  background: rgba(255, 214, 51, 0.08);
+  color: var(--heading-color);
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  transition: transform 0.24s ease, background 0.24s ease, color 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
+}
+
+.project-actions .action-link i {
+  font-size: 1rem;
+}
+
+.project-actions .project-demo-trigger {
+  cursor: pointer;
+  background: linear-gradient(135deg, rgba(255, 214, 51, 0.18), rgba(216, 255, 75, 0.08));
+}
+
+.project-actions .action-link:hover,
+.project-actions .action-link:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(255, 244, 92, 0.5);
+  background: linear-gradient(135deg, rgba(255, 214, 51, 0.28), rgba(216, 255, 75, 0.12));
+  color: #120d05;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 244, 92, 0.14),
+    0 0 22px rgba(255, 244, 92, 0.12);
+}
+
+.project-actions .action-link:focus-visible {
+  outline: 1px solid rgba(255, 244, 92, 0.72);
+  outline-offset: 2px;
 }
 
 .portfolio-note {
@@ -5004,6 +5057,126 @@ body.skills-modal-open {
   line-height: 1.6;
 }
 
+.project-modal .skills-modal-dialog {
+  width: min(1080px, 100%);
+  max-height: min(90vh, 960px);
+  padding: 32px 30px 28px;
+}
+
+.project-modal .skills-modal-body {
+  overflow: auto;
+  padding-right: 10px;
+}
+
+.project-modal-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.85fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.project-media-panel,
+.project-placeholder-media {
+  border: 1px solid var(--frame-color);
+  background:
+    linear-gradient(180deg, rgba(255, 214, 51, 0.06), rgba(216, 255, 75, 0.02)),
+    rgba(11, 7, 8, 0.9);
+  clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 22px 100%, 0 calc(100% - 22px));
+}
+
+.project-media-panel {
+  padding: 18px;
+}
+
+.project-video-shell {
+  display: grid;
+  gap: 14px;
+}
+
+.project-video-topbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 214, 51, 0.18);
+  background: rgba(255, 214, 51, 0.08);
+  color: rgba(236, 242, 185, 0.82);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+}
+
+.project-video-frame {
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border: 1px solid rgba(255, 214, 51, 0.18);
+  background:
+    radial-gradient(circle at top, rgba(255, 242, 74, 0.08), transparent 34%),
+    rgba(4, 3, 4, 0.96);
+  clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 22px 100%, 0 calc(100% - 22px));
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 244, 92, 0.05),
+    0 24px 44px rgba(0, 0, 0, 0.28);
+}
+
+.project-video-player {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #050404;
+}
+
+.project-placeholder-media {
+  min-height: 100%;
+  padding: 26px 24px;
+  display: grid;
+  align-content: center;
+  gap: 14px;
+}
+
+.project-placeholder-code {
+  display: inline-flex;
+  width: fit-content;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 214, 51, 0.18);
+  background: rgba(255, 214, 51, 0.12);
+  color: rgba(216, 255, 75, 0.84);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.project-placeholder-media h4 {
+  margin: 0;
+  color: var(--heading-color);
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  letter-spacing: 0.06em;
+}
+
+.project-placeholder-media p,
+.project-modal-note {
+  margin: 0;
+  color: rgba(232, 239, 179, 0.72);
+  line-height: 1.7;
+}
+
+.project-modal-side-panel {
+  display: grid;
+  gap: 16px;
+}
+
+.project-modal-note code {
+  padding: 2px 6px;
+  border: 1px solid rgba(255, 214, 51, 0.18);
+  background: rgba(255, 214, 51, 0.08);
+  color: rgba(236, 242, 185, 0.92);
+}
+
 @media (max-width: 991px) {
   .skills-hub-grid {
     grid-template-columns: 1fr 1fr;
@@ -5032,6 +5205,10 @@ body.skills-modal-open {
   .skill-modal-columns {
     grid-template-columns: 1fr;
   }
+
+  .project-modal-layout {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 768px) {
@@ -5046,7 +5223,13 @@ body.skills-modal-open {
   .skills-modal-close,
   .skill-modal-tag,
   .skill-modal-panel,
-  .skill-modal-chip-list span {
+  .skill-modal-chip-list span,
+  .project-actions .action-link,
+  .project-media-panel,
+  .project-placeholder-media,
+  .project-video-topbar,
+  .project-video-frame,
+  .project-placeholder-code {
     clip-path: none;
   }
 
@@ -5074,7 +5257,8 @@ body.skills-modal-open {
   }
 
   .skills-modal-body,
-  .journey-modal .skills-modal-body {
+  .journey-modal .skills-modal-body,
+  .project-modal .skills-modal-body {
     padding-right: 0;
   }
 
@@ -5087,6 +5271,15 @@ body.skills-modal-open {
 
   .skill-modal-header-copy {
     padding-right: 0;
+  }
+
+  .project-actions .action-link {
+    width: 100%;
+  }
+
+  .project-media-panel,
+  .project-placeholder-media {
+    padding: 18px 16px;
   }
 }
 
@@ -5556,6 +5749,10 @@ body.skills-modal-open {
 
 .project-archive-grid > [class*="col-"]:nth-child(3) {
   --project-deploy-delay: 0.4s;
+}
+
+.project-archive-grid > [class*="col-"]:nth-child(4) {
+  --project-deploy-delay: 0.52s;
 }
 
 .project-card::before {

@@ -50,6 +50,9 @@
   const journeyModal = document.querySelector('#journey-modal');
   const journeyModalBody = journeyModal?.querySelector('.journey-modal-body') ?? null;
   const journeyModalDialog = journeyModal?.querySelector('.skills-modal-dialog') ?? null;
+  const projectModal = document.querySelector('#project-modal');
+  const projectModalBody = projectModal?.querySelector('.project-modal-body') ?? null;
+  const projectModalDialog = projectModal?.querySelector('.skills-modal-dialog') ?? null;
 
   // Keep modals outside the main stacking context so they always cover the fixed sidebar.
   if (skillsModal) {
@@ -57,6 +60,9 @@
   }
   if (journeyModal) {
     document.body.appendChild(journeyModal);
+  }
+  if (projectModal) {
+    document.body.appendChild(projectModal);
   }
 
   function closeSkillModal() {
@@ -74,6 +80,7 @@
     if (!(template instanceof HTMLTemplateElement)) return;
 
     closeJourneyModal();
+    closeProjectModal();
     skillsModalBody.innerHTML = template.innerHTML;
     const modalTitle = skillsModalBody.querySelector('h3');
     if (modalTitle) {
@@ -102,6 +109,7 @@
     if (!(template instanceof HTMLTemplateElement)) return;
 
     closeSkillModal();
+    closeProjectModal();
     journeyModalBody.innerHTML = template.innerHTML;
     const modalTitle = journeyModalBody.querySelector('h3');
     if (modalTitle) {
@@ -112,6 +120,36 @@
     journeyModal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('skills-modal-open');
     syncModalScrollStateLater(journeyModal, journeyModalBody, journeyModalDialog);
+  }
+
+  function closeProjectModal() {
+    if (!projectModal || !projectModalBody) return;
+    clearTimeout(projectModal._modalScrollStateTimer);
+    projectModal.classList.remove('modal-needs-scroll');
+    projectModal.classList.remove('is-open');
+    projectModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('skills-modal-open');
+    projectModalBody.innerHTML = '';
+  }
+
+  function openProjectModal(templateId) {
+    if (!projectModal || !projectModalBody) return;
+
+    const template = document.querySelector(`#${templateId}`);
+    if (!(template instanceof HTMLTemplateElement)) return;
+
+    closeSkillModal();
+    closeJourneyModal();
+    projectModalBody.innerHTML = template.innerHTML;
+    const modalTitle = projectModalBody.querySelector('h3');
+    if (modalTitle) {
+      modalTitle.id = 'project-modal-title';
+    }
+
+    projectModal.classList.add('is-open');
+    projectModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('skills-modal-open');
+    syncModalScrollStateLater(projectModal, projectModalBody, projectModalDialog);
   }
 
   function syncModalScrollState(modal, body, dialog) {
@@ -157,6 +195,7 @@
     navmenu.addEventListener('click', (event) => {
       closeSkillModal();
       closeJourneyModal();
+      closeProjectModal();
 
       handleExpandableHashNavigation(event, navmenu.hash);
 
@@ -184,6 +223,9 @@
   window.addEventListener('resize', () => {
     if (journeyModal?.classList.contains('is-open')) {
       syncModalScrollStateLater(journeyModal, journeyModalBody, journeyModalDialog);
+    }
+    if (projectModal?.classList.contains('is-open')) {
+      syncModalScrollStateLater(projectModal, projectModalBody, projectModalDialog);
     }
   });
 
@@ -444,6 +486,7 @@
       if (section.id === 'portfolio') {
         clearTimeout(section._portfolioArchiveAnimationTimer);
         section.classList.remove('is-portfolio-animating');
+        closeProjectModal();
       }
       clearTimeout(section._expandableScrollTimer);
       clearTimeout(section._expandableScrollSettleTimer);
@@ -501,6 +544,19 @@
     element.addEventListener('click', closeJourneyModal);
   });
 
+  document.querySelectorAll('.project-demo-trigger').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const templateId = trigger.getAttribute('data-project-modal-target');
+      if (templateId) {
+        openProjectModal(templateId);
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-project-modal-close]').forEach((element) => {
+    element.addEventListener('click', closeProjectModal);
+  });
+
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
       if (skillsModal?.classList.contains('is-open')) {
@@ -508,6 +564,9 @@
       }
       if (journeyModal?.classList.contains('is-open')) {
         closeJourneyModal();
+      }
+      if (projectModal?.classList.contains('is-open')) {
+        closeProjectModal();
       }
     }
   });

@@ -1,3 +1,6 @@
 /forms/mailer-config.php
 /.env
 /.env.local
+/.DS_Store
+/assets/video/_compressed/
+/assets/video/_originals/

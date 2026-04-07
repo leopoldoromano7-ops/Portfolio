@@ -690,16 +690,64 @@
     <section id="portfolio" class="portfolio section expandable-section" data-expandable-label="Node 03 // Projects">
       <div class="container section-title" data-aos="fade-up">
         <h2>Progetti</h2>
-        <p>Tre progetti utili per capire stack, contesto e contributo reale: lavoro in team su Laravel, prova tecnica
-          completa e concept front-end sviluppato in autonomia.</p>
+        <p>Quattro progetti utili per capire stack, contesto e contributo reale: lavoro in team su Laravel, SPA React
+          con API esterna, prova tecnica completa e concept front-end sviluppato in autonomia.</p>
       </div>
 
       <div class="container">
         <div class="row gy-4 project-archive-grid">
-          <div class="col-lg-4 col-md-6">
+          <div class="col-lg-6">
+            <article class="project-card" data-aos="fade-up" data-aos-delay="100">
+              <div class="project-icon"><i class="bi bi-controller"></i></div>
+              <span class="project-type">Aulab React Project</span>
+              <h3>Rehacktor</h3>
+              <div class="project-role-strip">
+                <span>Solo project</span>
+                <span>Game catalog</span>
+                <span>Frontend + API integration</span>
+              </div>
+              <p>Piattaforma web dedicata al mondo gaming, progettata per esplorare videogiochi tramite catalogo live,
+                filtri per genere, ricerca, schede dettaglio e area utente con preferiti e recensioni.</p>
+              <p class="project-contribution">
+                <strong>Il mio focus:</strong> costruire una SPA moderna con dati live da API esterna,
+                autenticazione utenti, gestione stato e un'esperienza responsive pensata per navigazione,
+                consultazione e interazione.
+              </p>
+              <div class="project-tags">
+                <span>React</span>
+                <span>React Router</span>
+                <span>Tailwind CSS</span>
+                <span>DaisyUI</span>
+                <span>Supabase</span>
+                <span>RAWG API</span>
+                <span>Vite</span>
+              </div>
+              <ul class="project-points">
+                <li>Catalogo giochi con feed live, ricerca, pagine per genere e schede dettaglio costruite su dati
+                  RAWG.</li>
+                <li>Autenticazione e profilo utente con Supabase, avatar personalizzato, gestione preferiti e
+                  recensioni.</li>
+                <li>UI responsive con fallback offline, loader di navigazione e componenti riusabili per una
+                  consultazione fluida.</li>
+              </ul>
+              <div class="project-actions">
+                <button type="button" class="action-link project-demo-trigger"
+                  data-project-modal-target="project-modal-rehacktor" aria-haspopup="dialog">
+                  <i class="bi bi-play-circle"></i>
+                  <span>Guarda demo</span>
+                </button>
+                <a class="action-link" href="https://github.com/leopoldoromano7-ops/rehacktor-gaming-hub" target="_blank" rel="noreferrer">
+                  <i class="bi bi-github"></i>
+                  <span>Apri il repository</span>
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-lg-6">
             <article class="project-card" data-aos="fade-up" data-aos-delay="100">
               <div class="project-icon"><i class="bi bi-shop-window"></i></div>
-              <span class="project-type">Aulab Hackademy</span>
+              <span class="project-type">Aulab Laravel Project</span>
               <h3>Presto</h3>
               <div class="project-role-strip">
                 <span>Team project</span>
@@ -725,47 +773,71 @@
                 <li>Ricerca full-text con Scout e TNTSearch, supporto multi-lingua IT/EN e dashboard revisore.</li>
                 <li>Job asincroni per resize immagini e integrazione AI per analisi visuale con Google Cloud Vision.</li>
               </ul>
-              <a class="action-link" href="https://github.com/leopoldoromano7-ops/Presto-ecommerce-web-app"
-                target="_blank"
-                rel="noreferrer">Apri il repository</a>
+              <div class="project-actions">
+                <button type="button" class="action-link project-demo-trigger"
+                  data-project-modal-target="project-modal-presto" aria-haspopup="dialog">
+                  <i class="bi bi-play-circle"></i>
+                  <span>Guarda demo</span>
+                </button>
+                <a class="action-link" href="https://github.com/leopoldoromano7-ops/Presto-ecommerce-web-app"
+                  target="_blank" rel="noreferrer">
+                  <i class="bi bi-github"></i>
+                  <span>Apri il repository</span>
+                </a>
+              </div>
             </article>
           </div>
 
-          <div class="col-lg-4 col-md-6">
+          <div class="col-lg-6">
             <article class="project-card" data-aos="fade-up" data-aos-delay="200">
               <div class="project-icon"><i class="bi bi-file-earmark-code"></i></div>
               <span class="project-type">Prova tecnica</span>
               <h3>Mbizzica</h3>
               <div class="project-role-strip">
                 <span>Prova individuale</span>
+                <span>Laravel full-stack</span>
                 <span>CRUD + auth</span>
-                <span>Prodotto completo</span>
               </div>
-              <p>Paste sharing app sviluppata per una prova con SoftwareEngine SRL: permette di creare, proteggere,
-                filtrare e condividere contenuti testuali con logiche piu vicine a un prodotto reale.</p>
+              <p>
+                Paste sharing app sviluppata come prova tecnica per SoftwareEngine SRL:
+                permette di creare, filtrare e condividere contenuti testuali con
+                visibilità pubblica, privata e non elencata.
+              </p>
               <p class="project-contribution">
-                <strong>Il mio focus:</strong> costruire da solo una web app Laravel con autenticazione, permessi,
-                filtri, API e funzioni abbastanza ampie da mostrare autonomia tecnica.
+                <strong>Il mio focus:</strong> progettare e sviluppare in autonomia una web app Laravel
+                con autenticazione, permessi, 2FA, filtri, commenti e gestione allegati,
+                avvicinando il progetto a un caso d’uso reale.
               </p>
               <div class="project-tags">
                 <span>PHP</span>
                 <span>Laravel</span>
-                <span>MySQL</span>
                 <span>Blade</span>
                 <span>Bootstrap</span>
-                <span>AJAX</span>
+                <span>SQLite</span>
+                <span>JavaScript</span>
               </div>
               <ul class="project-points">
-                <li>Autenticazione con login, registrazione e two-factor authentication.</li>
-                <li>Paste pubbliche, private e unlisted, con protezione password, tag, categorie e filtri.</li>
-                <li>Commenti, voting system, notifiche, upload file e REST API.</li>
+                <li>Autenticazione con login, registrazione, reset password e two-factor authentication.</li>
+                <li>Paste pubblici, privati e non elencati, con link condivisibile, tag e filtri di ricerca.</li>
+                <li>Commenti, upload allegati, anteprima immagini e gestione completa del flusso CRUD.</li>
               </ul>
-              <a class="action-link" href="https://github.com/leopoldoromano7-ops/mbizzica-web-app-laravel"
-                target="_blank" rel="noreferrer">Apri il repository</a>
+              <div class="project-actions">
+                <button type="button" class="action-link project-demo-trigger"
+                  data-project-modal-target="project-modal-mbizzica" aria-haspopup="dialog">
+                  <i class="bi bi-play-circle"></i>
+                  <span>Guarda demo</span>
+                </button>
+                <a class="action-link" href="https://github.com/leopoldoromano7-ops/mbizzica-web-app-laravel"
+                  target="_blank" rel="noreferrer">
+                  <i class="bi bi-github"></i>
+                  <span>Apri il repository</span>
+                </a>
+              </div>
             </article>
           </div>
 
-          <div class="col-lg-4 col-md-6">
+
+          <div class="col-lg-6">
             <article class="project-card" data-aos="fade-up" data-aos-delay="300">
               <div class="project-icon"><i class="bi bi-car-front"></i></div>
               <span class="project-type">Concept front-end</span>
@@ -793,8 +865,19 @@
                 <li>Focus su gerarchia visiva, schede prodotto, listing e leggibilita mobile.</li>
                 <li>Progetto utile per mostrare il mio contributo front-end parallelo al lavoro su Presto.</li>
               </ul>
-              <a class="action-link" href="https://github.com/leopoldoromano7-ops/Presto_MotoStore-Frontend-E-commerce-UI"
-                target="_blank" rel="noreferrer">Apri il repository</a>
+              <div class="project-actions">
+                <button type="button" class="action-link project-demo-trigger"
+                  data-project-modal-target="project-modal-motostore" aria-haspopup="dialog">
+                  <i class="bi bi-play-circle"></i>
+                  <span>Guarda demo</span>
+                </button>
+                <a class="action-link"
+                  href="https://github.com/leopoldoromano7-ops/Presto_MotoStore-Frontend-E-commerce-UI"
+                  target="_blank" rel="noreferrer">
+                  <i class="bi bi-github"></i>
+                  <span>Apri il repository</span>
+                </a>
+              </div>
             </article>
           </div>
         </div>
@@ -804,7 +887,142 @@
             target="_blank" rel="noreferrer">Vedi altri progetti su GitHub</a>
         </div>
       </div>
+
+      
+      <template id="project-modal-rehacktor">
+        <div class="skill-modal-header-copy project-modal-header-copy">
+          <span class="skill-modal-tag">Project Demo // Rehacktor</span>
+          <h3>Rehacktor</h3>
+          <p>Demo reale del progetto React</p>
+          </div>
+          <div class="project-modal-layout">
+            <div class="project-media-panel">
+              <div class="project-video-shell">
+                <div class="project-video-topbar">
+                  <span>Demo Capture</span>
+                  <span>React / Supabase / RAWG</span>
+                </div>
+                <div class="project-video-frame">
+                  <video class="project-video-player" controls preload="metadata" playsinline>
+                    <source src="assets/video/Rehacktor.mp4" type="video/mp4">
+                    Il tuo browser non supporta la riproduzione video HTML5.
+                  </video>
+                </div>
+            </div>
+          </div>
+          <aside class="skill-modal-panel project-modal-side-panel">
+            <h4>Cosa si vede nella demo</h4>
+            <ul class="skill-modal-points">
+              <li>Navigazione nel catalogo giochi con dati live e flusso di ricerca.</li>
+              <li>Autenticazione utente, area profilo, preferiti e recensioni salvate.</li>
+              <li>Esperienza responsive pensata per consultazione e lettura delle schede.</li>
+            </ul>
+            <p class="project-modal-note"> Stack:<code>React // React Router // Tailwind CSS // DaisyUI // Vite</code></p>
+          </aside>
+        </div>
+      </template>
+      <template id="project-modal-presto">
+        <div class="skill-modal-header-copy project-modal-header-copy">
+          <span class="skill-modal-tag">Project Demo // Presto</span>
+          <h3>Presto</h3>
+          <p> Walkthrough del marketplace Laravel.</p>
+        </div>
+        <div class="project-modal-layout">
+          <div class="project-media-panel">
+            <div class="project-video-shell">
+              <div class="project-video-topbar">
+                <span>Demo Capture</span>
+                <span>React / Supabase / RAWG</span>
+              </div>
+              <div class="project-video-frame">
+                <video class="project-video-player" controls preload="metadata" playsinline>
+                  <source src="assets/video/Presto.mp4" type="video/mp4">
+                  Il tuo browser non supporta la riproduzione video HTML5.
+                </video>
+              </div>
+            </div>
+          </div>
+          <aside class="skill-modal-panel project-modal-side-panel">
+            <h4>Cosa mostrare</h4>
+            <ul class="skill-modal-points">
+              <li>Flusso completo di inserimento annuncio con immagini e dati prodotto.</li>
+              <li>Ricerca, filtri e supporto multi-lingua lato utente.</li>
+              <li>Passaggio rapido nella dashboard revisore e nel workflow di moderazione.</li>
+            </ul>
+            <p class="project-modal-note"> Stack:<code>Laravel // PHP // MySQL // Livewire // Fortify</code></p>
+          </aside>
+        </div>
+      </template>
+
+      <template id="project-modal-mbizzica">
+        <div class="skill-modal-header-copy project-modal-header-copy">
+          <span class="skill-modal-tag">Project Demo // Mbizzica</span>
+          <h3>Mbizzica</h3>
+          <p>Video della prova tecnica Mbizzica</p>
+        </div>
+        <div class="project-modal-layout">
+          <div class="project-media-panel">
+              <div class="project-video-frame">
+                <video class="project-video-player" controls preload="metadata" playsinline>
+                  <source src="assets/video/Mbizzica.mp4" type="video/mp4">
+                  Il tuo browser non supporta la riproduzione video HTML5.
+                </video>
+              </div>
+          </div>
+          <aside class="skill-modal-panel project-modal-side-panel">
+            <h4>Cosa mostrare</h4>
+            <ul class="skill-modal-points">
+              <li>Creazione, filtro e gestione delle paste tra pubblico, private e unlisted.</li>
+              <li>Login, registrazione e two-factor authentication in un flusso breve ma chiaro.</li>
+              <li>REST API, commenti e gestione allegati come prova di completezza.</li>
+            </ul>
+            <p class="project-modal-note"> Stack:<code>Laravel // PHP // MariaDB // AJAX // Fortify</code></p>
+
+          </aside>
+        </div>
+      </template>
+
+      <template id="project-modal-motostore">
+        <div class="skill-modal-header-copy project-modal-header-copy">
+          <span class="skill-modal-tag">Project Demo // MotoStore</span>
+          <h3>Presto MotoStore</h3>
+          <p>Video per il side project di Presto Moto Store, progetto pensato per far emergere gerarchia
+            visiva, listing e scelte UI.</p>
+        </div>
+        <div class="project-modal-layout">
+          <div class="project-media-panel">
+                <div class="project-video-frame">
+                  <video class="project-video-player" controls preload="metadata" playsinline>
+                    <source src="assets/video/PrerstoMotoStore.mp4" type="video/mp4">
+                    Il tuo browser non supporta la riproduzione video HTML5.
+                  </video>
+                </div>
+          </div>
+          <aside class="skill-modal-panel project-modal-side-panel">
+            <h4>Cosa mostrare</h4>
+            <ul class="skill-modal-points">
+              <li>Hero, listing e schede prodotto per far vedere subito la gerarchia della UI.</li>
+              <li>Dettagli visuali, responsive mobile e variazioni di layout tra sezioni.</li>
+              <li>Scelte di tono grafico e presentazione del concept come estensione di Presto.</li>
+            </ul>
+            <p class="project-modal-note"> Stack:<code>HTML // CSS // JavaScript // Bootstrap</code></p>
+
+          </aside>
+        </div>
+      </template>
     </section>
+
+    <div class="skills-modal project-modal" id="project-modal" aria-hidden="true">
+      <div class="skills-modal-backdrop" data-project-modal-close></div>
+      <div class="skills-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+        <span class="skills-modal-frame skills-modal-frame-outer" aria-hidden="true"></span>
+        <span class="skills-modal-frame skills-modal-frame-inner" aria-hidden="true"></span>
+        <button type="button" class="skills-modal-close" data-project-modal-close aria-label="Chiudi demo progetto">
+          <i class="bi bi-x-lg"></i>
+        </button>
+        <div class="skills-modal-body project-modal-body"></div>
+      </div>
+    </div>
 
     <section id="services" class="services section light-background expandable-section"
       data-expandable-label="Node 04 // Workflow">
