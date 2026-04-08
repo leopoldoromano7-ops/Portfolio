@@ -3358,6 +3358,11 @@ h6 {
 
 html {
   scrollbar-color: var(--accent-soft-color) #070506;
+  background:
+    radial-gradient(circle at 14% 18%, rgba(255, 244, 92, 0.16), transparent 24%),
+    radial-gradient(circle at 82% 18%, rgba(216, 255, 75, 0.16), transparent 22%),
+    radial-gradient(circle at 82% 84%, rgba(255, 214, 51, 0.14), transparent 22%),
+    linear-gradient(145deg, #070405 0%, #130707 38%, #040304 100%);
 }
 
 body {
